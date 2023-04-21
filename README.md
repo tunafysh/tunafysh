@@ -1,1 +1,1 @@
-**Anger makes you smaller while fogriveness forces you to grow.
+**Anger makes you smaller, while forgiveness forces you to grow beyond what you were.
