@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion, useAnimationControls } from "framer-motion"
+import { motion } from "framer-motion"
 
 export default function Task({ img }: { img: string }) {
     const [isActive, setIsActive] = useState(false)
