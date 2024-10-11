@@ -1,24 +1,23 @@
-import { Resizable } from "re-resizable"
-import { useState } from "react"
+import { Rnd } from "react-rnd"
 
 export default function Window({title}: {title: string}) {
-    const [ position, setPosition] = useState({ x: 0, y: 0 })
 
     return (
-        <Resizable
-        defaultSize={{ width: 600, height: 400 }}
+        <Rnd default={{ x: 0, y: 0, width: 800, height: 600 }}
         style={{
             position: "fixed",
-            background: "white",
             borderRadius: "10px",
-            top: position.y,
-            left: position.x,
         }}>
 
-            <div id="windowbar" className="w-full border-b-[1px] border-gray h-10" onDrag={(e) => setPosition({ x: e.x, y: e.y }))}>{title}</div>
-            <div id="windowcontent" className="w-full h-full overflow-auto rounded-b-lg">
-                    <iframe src="https://ovsx.vercel.app" width="100%" height="100%"></iframe>
+            <div id="windowbar" className="bg-[rgba(55,55,55,1)] font-semibold pl-2.5 bg-clip-border w-full flex justify-between items-center rounded-t-lg border-gray h-10 text-white">
+                <p>{title}</p>
+                <ul>
+                    <li><button className="h-full aspect-square"></button></li>
+                    <li><button className="h-full aspect-square"></button></li>
+                    <li><button className="h-full aspect-square"></button></li>
+                </ul>
             </div>
-        </Resizable>
+            <iframe src="https://ovsx.vercel.app" className="-z-10 rounded-b-lg" width="100%" height="93%"></iframe>
+        </Rnd>
     )
 }

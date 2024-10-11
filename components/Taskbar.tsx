@@ -15,14 +15,12 @@ export default function Taskbar() {
     }, [time]);
 
     return (
-        <div className="absolute w-full h-16 top-[calc(100%-4rem)] flex justify-between items-center rounded-t-3xl dark:bg-[hsla(0,0%,14%,1)] bg-[rgba(255,255,255,0.7)] p-2 px-4">
+        <div className="absolute w-full h-16 top-[calc(100%-4rem)] flex justify-between items-center rounded-t-3xl bg-[hsla(0,0%,14%,1)] p-2 px-4">
             <div id="startbtn" className="w-11 h-11 bg-[rgba(55,55,55,1)] rounded-full cursor-pointer flex justify-center items-center">
                 <CircleIcon className="w-8 h-8"/>
             </div>
             <div id="taskmgr" className="flex flex-row gap-2.5">
-            <Task img="#FF0000"/>
             <Task img="#00FF00"/>
-            <Task img="#0000FF"/>
             </div>
             <div className="flex flex-row gap-2">
 
