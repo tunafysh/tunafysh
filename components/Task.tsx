@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, } from "react"
 import { motion } from "framer-motion"
 
-export default function Task({ img }: { img: string }) {
-    const [isActive, setIsActive] = useState(false)
+export default function Task({ img, active, setactive }: { img: string, active: boolean, setactive: Dispatch<SetStateAction<boolean>> }) {
 
     const taskVariants = {
         "active": {
@@ -15,13 +14,10 @@ export default function Task({ img }: { img: string }) {
         }
     }
 
-    useEffect(() => {
-        setIsActive(isActive)
-    }, [isActive])
     return (
-        <motion.div className="flex flex-col justify-center items-center" transition={{ duration: 1 }} onClick={() => {setIsActive(!isActive); console.log(isActive)}}>
+        <motion.div className="flex flex-col justify-center items-center" transition={{ duration: 1 }} onClick={() => {setactive(!active); console.log(active)}}>
         <motion.div className={`bg-[${img}] w-8 h-8 rounded-full cursor-pointer mb-1 `} transition={{ duration: 1 }}></motion.div>
-        <motion.div className="h-1 rounded-full" variants={taskVariants} initial="inactive" animate={isActive ? "active" : "inactive"} transition={{ duration: 0.25 }}></motion.div>
+        <motion.div className="h-1 rounded-full" variants={taskVariants} initial="inactive" animate={active ? "active" : "inactive"} transition={{ duration: 0.25 }}></motion.div>
         </motion.div>
     )
 }

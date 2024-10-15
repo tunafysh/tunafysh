@@ -1,11 +1,13 @@
 "use client"
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import Task from "./Task";
 import { CircleIcon } from "@radix-ui/react-icons";
 import { NotepadTextIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
-export default function Taskbar() {
+export default function Taskbar({active, setactive}: {active: boolean, setactive: Dispatch<SetStateAction<boolean>>}) {
     const [ time, setTime ] = useState(() => new Date().toLocaleTimeString())
+    const [ startmenu, setStartmenu ] = useState(false)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -15,18 +17,20 @@ export default function Taskbar() {
     }, [time]);
 
     return (
-        <div className="absolute w-full h-16 top-[calc(100%-4rem)] flex justify-between items-center rounded-t-3xl bg-[hsla(0,0%,14%,1)] p-2 px-4">
-            <div id="startbtn" className="w-11 h-11 bg-[rgba(55,55,55,1)] rounded-full cursor-pointer flex justify-center items-center">
+        <motion.div className={`fixed bottom-0 w-full ${startmenu? "h-64" : "h-16"} flex items-end rounded-t-3xl bg-[hsla(0,0%,14%,0.7)] p-2 px-4`}>
+            <div className="flex justify-between w-full items-end">
+            <div id="startbtn" onClick={() => setStartmenu(!startmenu)} className="w-11 h-11 bg-[rgba(55,55,55,1)] rounded-full cursor-pointer flex justify-center items-center">
                 <CircleIcon className="w-8 h-8"/>
             </div>
             <div id="taskmgr" className="flex flex-row gap-2.5">
-            <Task img="#00FF00"/>
+            <Task img="#00FF00" active={active} setactive={setactive}/>
             </div>
             <div className="flex flex-row gap-2">
 
             <div suppressHydrationWarning id="notifications" className="font-bold bg-[rgba(55,55,55,1)] rounded-l-full p-2 px-3 pl-4 flex justify-center items-center cursor-pointer"><NotepadTextIcon className="w-4 h-4"/></div>
             <div suppressHydrationWarning id="date" className="font-bold bg-[rgba(55,55,55,1)] rounded-r-full p-2 px-4 cursor-pointer">{time}</div>
             </div>
-        </div>
+            </div>
+        </motion.div>
     )
 }
