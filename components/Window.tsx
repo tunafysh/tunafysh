@@ -1,13 +1,18 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { Rnd } from "react-rnd"
+import { windowStates } from "./defs"
 
 export default function Window({title, active, setactive}: {title: string, active: boolean, setactive: Dispatch<SetStateAction<boolean>>}) {
+    const [ state, setState ] = useState(Number(localStorage.getItem("windowState")??"normal"))
+
     return (
-        <Rnd default={{ x: 0, y: 0, width: 800, height: 600 }}
+        <Rnd default={{ x: 0, y: 0, width: state === windowStates.normal ? 800: 0, height: state === windowStates.normal ? 600 : 0 }}
         style={{
             display: active ? "block" : "none",
             position: "fixed",
             borderRadius: "10px",
+            width: state === windowStates.maximized ? "100%" : 0,
+            height: state === windowStates.normal ? "100%" : 0
         }}>
 
             <div id="windowbar" className="bg-[hsla(0,0%,14%,0.92)] pl-2.5 bg-clip-border w-full flex justify-between items-center rounded-t-lg border-gray h-8 text-white">
