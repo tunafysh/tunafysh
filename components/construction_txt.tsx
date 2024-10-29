@@ -33,6 +33,8 @@ export function ConstructionTxt() {
       >
         Under Construction
       </motion.h1>
+      <br />
+      <h1 className="text-transparent">{"Du me dek <3"}</h1>
      
     </motion.div>
   );

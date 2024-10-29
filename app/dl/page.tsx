@@ -3,7 +3,7 @@ import { ConstructionTxt } from "@/components/construction_txt";
 
 export default function DL() {
     const isProduction = process.env.NODE_ENV === 'production';
-    if(isProduction){
+    if(!isProduction){
 
         return (
             <div className="h-screen w-full bg-black  bg-dot-orange-500/[0.7] relative flex items-center justify-center">
