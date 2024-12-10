@@ -3,27 +3,29 @@ import Main from "@/components/screens/main";
 import TabBar from "@/components/tabbar";
 import { useState } from "react";
 import { PageProps } from "@/components/defs";
+import { TictactoeScreen, CatalystScreen, CreprintScreen } from "@/components/screens/screens";
 
 export default function Home() {
-  const [, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [pages, setPages] = useState<PageProps[]>([{
     title: 'Home',
     status: 'indestructible',
     screen: <Main />,
   },{
-    title: 'idk',
+    title: 'Tictactoe',
     status: 'open',
-    screen: <Main />,
+    screen: <TictactoeScreen />,
   },{
-    title: 'idk but diff',
-    status: 'closed',
-    screen: <Main />,
+    title: 'Creative Print',
+    status: 'open',
+    screen: <CreprintScreen />,
   }]);
 
   return (
-    <>
-      <TabBar pages={pages} setPages={setPages} setCurrentPage={setCurrentPage} />
-    </>
+    <div className="w-full h-screen">
+      <TabBar pages={pages} currentPage={currentPage} setPages={setPages} setCurrentPage={setCurrentPage} />
+      {pages[currentPage].screen}
+    </div>
   );
 }

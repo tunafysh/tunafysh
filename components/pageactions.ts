@@ -6,5 +6,9 @@ export const addPage = (setPages: Dispatch<SetStateAction<PageProps[]>>, page: P
   };
 
 export const removePage = (setPages: Dispatch<SetStateAction<PageProps[]>>, index: number) => {
-    setPages((prevPages) => prevPages.filter((_, i) => i !== index));
+    setPages((prevPages) =>
+      prevPages.map((page, i) =>
+        i === index ? { ...page, status: "closed" } : page
+      )
+    );
   }

@@ -12,4 +12,5 @@ export interface PageProps {
     onClick: () => void;
     setPages: Dispatch<SetStateAction<PageProps[]>>;
     currentPage: number;
+    setCurrentPage: Dispatch<SetStateAction<number>>
   }
