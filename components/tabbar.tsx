@@ -1,52 +1,104 @@
 "use client"
-import { motion } from "motion/react";
-import { TabProps, PageProps } from "@/components/defs";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { removePage } from "./pageactions";
 
-export function Tab({ title, status, onClick, setPages, currentPage, setCurrentPage }: TabProps) {
-    if(status == 'closed'){
-        return(<></>)
-    }
-    else{
-    return (
-        
-            <div onClick={onClick} className="w-36 h-8 rounded-md ring-1 ring-gray-700 cursor-pointer flex flex-row items-center pl-5 pr-3 justify-between">
-            <h1 className="h-fit font-semibold text-sm">{title}</h1>
-        {status == 'open'? <div className="select-none flex items-center justify-centerw-8 h-8 text-red-500" onClick={() => {
-            removePage(setPages, currentPage)
-            if (currentPage > 0) {
-                setCurrentPage(currentPage - 1);
-            }
-            }}>X</div>: <></>}
-        </div> 
-    )}
+import { motion, AnimatePresence } from "motion/react"
+import { X } from 'lucide-react'
+import { ReactNode, useState } from "react"
+import MainScreen from "@/components/screens/main"
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CatalystScreen, TictactoeScreen, CreprintScreen } from "@/components/screens/screens"
+/*
+{ id: "2", title: "Catalyst", screen: <CatalystScreen/> },
+  { id: "3", title: "Tictactoe", screen: <TictactoeScreen/> },
+  { id: "4", title: "Creative Print", screen: <CreprintScreen/> },
+*/
+interface Page {
+  id: string
+  title: string
+  screen: ReactNode
 }
+
+const initialPages: Page[] = [
+  { id: "1", title: "Main", screen: <MainScreen /> },
+]
 
 const tabVariants = {
-    "hidden": {
-        transform: "translateY(-100%)",
-    },
-    "visible": {
-        transform: "translateY(0%)",
-    }
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0 },
 }
 
-export default function TabBar({ pages, currentPage, setCurrentPage, setPages }: {pages: PageProps[], currentPage: number, setCurrentPage: Dispatch<SetStateAction<number>>, setPages: Dispatch<SetStateAction<PageProps[]>>}) {
-    useEffect(() => {
-        if(pages.length === 1){
-            setCurrentPage(0)
-        }
-    }, [pages, setCurrentPage]);
-    return (
-        <motion.div variants={tabVariants} initial="hidden" animate={pages.length === 1 || pages.filter(page => page.status !== 'closed').length === 1? "hidden" : "visible"} className={`w-full h-12 border-b-2 border-gray-700 flex items-center px-2`} transition={{delay: 0.5}}>
-            {pages.length === 1 || pages.filter(page => page.status !== 'closed').length === 1? <></> : (
-                <div className="flex space-x-2 gap-2">
-                    {pages.map((page) => (
-                        <Tab key={page.title} currentPage={currentPage} setPages={setPages} title={page.title} status={page.status} setCurrentPage={setCurrentPage} onClick={() => setCurrentPage(pages.indexOf(page))} />
-                    ))}
-                </div>
-            )}
-        </motion.div>
-    );
+export default function IframeTabs() {
+  const [pages, setPages] = useState<Page[]>(initialPages)
+  const [currentPageId, setCurrentPageId] = useState(pages[0].id)
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const addPage = (page: Page) => {
+    const newPage: Page = {
+      id: page.id,
+      title: page.title,
+      screen: page.screen
+    }
+    setPages([...pages, newPage])
+    setCurrentPageId(newPage.id)
+  }
+
+  const removePage = (id: string) => {
+    const newPages = pages.filter(page => page.id !== id)
+    setPages(newPages)
+    if (currentPageId === id) {
+      setCurrentPageId(newPages[newPages.length - 1]?.id || "")
+    }
+  }
+
+  return (
+    <div className="w-full h-screen flex flex-col bg-gray-900">
+      <AnimatePresence>
+        {pages.length > 1 && (
+          <motion.div
+            variants={tabVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="w-full h-12 border-b-2 border-gray-700 flex items-center px-2 select-none"
+            transition={{delay: 0.5}}
+          >
+            <div className="flex space-x-2 gap-2 select-none">
+              {pages.map((page) => (
+                <motion.div
+                  key={page.id}
+                  onClick={() => setCurrentPageId(page.id)}
+                  className={`relative flex items-center px-4 py-2 rounded-lg cursor-pointer select-none ${
+                    currentPageId === page.id ? 'bg-white hover:bg-white/70 text-black' : 'bg-gray-800 hover:bg-gray-700 text-gray-400'
+                  }`}
+                  layout
+                >
+                  <span className="mr-2">{page.title}</span>
+                  {page.id === "1"? <></>: <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      removePage(page.id)
+                    }}
+                    className="p-1 rounded-full hover:bg-red-500 hover:text-white"
+                    aria-label={`Close ${page.title} tab`}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="flex-grow relative">
+        {pages.map((page) => (
+          <div
+            key={page.id}
+            className={`absolute inset-0 ${currentPageId === page.id ? "block" : "hidden"}`}
+          >
+            {page.screen}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
+

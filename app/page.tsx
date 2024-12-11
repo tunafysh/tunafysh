@@ -1,14 +1,14 @@
 "use client";
 import Main from "@/components/screens/main";
-import TabBar from "@/components/tabbar";
+import IframeTabs from "@/components/tabbar";
 import { useState } from "react";
 import { PageProps } from "@/components/defs";
-import { TictactoeScreen, CatalystScreen, CreprintScreen } from "@/components/screens/screens";
+import { TictactoeScreen, CreprintScreen } from "@/components/screens/screens";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage] = useState(0);
 
-  const [pages, setPages] = useState<PageProps[]>([{
+  const [pages] = useState<PageProps[]>([{
     title: 'Home',
     status: 'indestructible',
     screen: <Main />,
@@ -23,8 +23,8 @@ export default function Home() {
   }]);
 
   return (
-    <div className="w-full h-screen">
-      <TabBar pages={pages} currentPage={currentPage} setPages={setPages} setCurrentPage={setCurrentPage} />
+    <div className="w-full h-screen overflow-hidden">
+      <IframeTabs />
       {pages[currentPage].screen}
     </div>
   );
