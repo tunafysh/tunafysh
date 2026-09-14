@@ -33,5 +33,6 @@
     "babel-plugin-react-compiler": "1.0.0",
     "tailwindcss": "^4",
     "typescript": "^7.0.2"
-  }
+  },
+  "packageManager": "pnpm@10.17.1"
 }
