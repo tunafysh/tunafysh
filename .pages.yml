@@ -1,4 +1,4 @@
-media: media
+media: public
 content:
   - name: blog
     label: Blog
