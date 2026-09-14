@@ -4,6 +4,7 @@ content:
     label: Blog
     type: collection
     path: content/blog
+    filename: "{slug}.mdx"
     fields:
       - name: title
         type: string
