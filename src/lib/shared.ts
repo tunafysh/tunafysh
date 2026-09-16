@@ -1,1 +1,1 @@
-export const blogRoute = '/blog';
+export const blogRoute = "/blog";

@@ -26,6 +26,9 @@ importers:
       lucide-react:
         specifier: ^1.46.0
         version: 1.46.0(react@19.2.8)
+      motion:
+        specifier: ^13.3.0
+        version: 13.3.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next:
         specifier: 16.3.5
         version: 16.3.5(@babel/core@7.29.7)(@types/node@20.19.43)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -38,6 +41,9 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
+      react-knob-headless:
+        specifier: 0.4.0
+        version: 0.4.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       shadcn:
         specifier: ^4.21.0
         version: 4.21.0(typescript@7.0.2)
@@ -298,6 +304,9 @@ packages:
 
   '@dotenvx/primitives@0.8.0':
     resolution: {integrity: sha512-VYJy0uhFm9zTJ1TxBaW/pA8bjbOM/OttaNMwZ1RHG4JKyRG7DhSdiqD1ipQoAyoD22olUtxbP78W9xY3Wd11bg==}
+
+  '@dsp-ts/math@0.1.0':
+    resolution: {integrity: sha512-NDjfx30t9IPqbSKKYyjro0QXX4m6dgW4pnuAbNMI442ePKyn0xG/L2rTBYM5NoT3IP0Y2EA0hCPhXlVNvRb7Vg==}
 
   '@emnapi/runtime@1.11.3':
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
@@ -1070,6 +1079,14 @@ packages:
 
   '@ungap/structured-clone@1.4.0':
     resolution: {integrity: sha512-1mEZtMKPM09vDmQt5y7YvmN2+DFTP7Tg0EWXdic8/C6VRnpb33e4ghisCIE3WZjsE2N8mf+QV1Zqh7ZFYLWInQ==}
+
+  '@use-gesture/core@10.3.1':
+    resolution: {integrity: sha512-WcINiDt8WjqBdUXye25anHiNxPc0VOrlT8F6LLkU6cycrOGUDyY/yyFmsg3k8i5OLvv25llc0QC45GhR/C8llw==}
+
+  '@use-gesture/react@10.3.1':
+    resolution: {integrity: sha512-Yy19y6O2GJq8f7CHf7L0nxL8bf4PZCPaVOCgJrusOeFHY1LvHgYXnmnXg6N5iwAnbgbZCDjo60SiM6IPJi9C5g==}
+    peerDependencies:
+      react: '>= 16.8.0'
 
   '@yuku-analyzer/binding-android-arm64@0.9.5':
     resolution: {integrity: sha512-Rvr0/EkPfPgc0C1wx8dz4bv6o4I4yeYI06tcHUL0f4ZdwSyIreABoLHNW51Ap0VNA7aDRVQ4izRNQh/LuykofA==}
@@ -2186,6 +2203,9 @@ packages:
     resolution: {integrity: sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==}
     engines: {node: '>=18'}
 
+  merge-props@6.0.0:
+    resolution: {integrity: sha512-ORZFZMGKE5PuAi7YfVCfPz3jiS9V0t2XXE2AGYiwMrcudRuj0hkXKEzsl17pUF07r+Digf9YlTzteX2LFE6vAQ==}
+
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
 
@@ -2583,6 +2603,19 @@ packages:
     resolution: {integrity: sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==}
     peerDependencies:
       react: ^19.2.8
+
+  react-knob-headless@0.4.0:
+    resolution: {integrity: sha512-woqJRwDLVWN78zaOjdRVqyU0FyZHw1PHYMlmYltgAm7Mzg7OWs+aRkctIMqP9Prbhrd/7I9E7XMY2eWbG3r+Eg==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
 
   react-remove-scroll-bar@2.3.8:
     resolution: {integrity: sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==}
@@ -3355,6 +3388,8 @@ snapshots:
 
   '@dotenvx/primitives@0.8.0': {}
 
+  '@dsp-ts/math@0.1.0': {}
+
   '@emnapi/runtime@1.11.3':
     dependencies:
       tslib: 2.8.1
@@ -3957,6 +3992,13 @@ snapshots:
     optional: true
 
   '@ungap/structured-clone@1.4.0': {}
+
+  '@use-gesture/core@10.3.1': {}
+
+  '@use-gesture/react@10.3.1(react@19.2.8)':
+    dependencies:
+      '@use-gesture/core': 10.3.1
+      react: 19.2.8
 
   '@yuku-analyzer/binding-android-arm64@0.9.5':
     optional: true
@@ -5121,6 +5163,8 @@ snapshots:
 
   merge-descriptors@2.0.0: {}
 
+  merge-props@6.0.0: {}
+
   merge-stream@2.0.0: {}
 
   merge2@1.4.1: {}
@@ -5679,6 +5723,17 @@ snapshots:
     dependencies:
       react: 19.2.8
       scheduler: 0.27.0
+
+  react-knob-headless@0.4.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+    dependencies:
+      '@dsp-ts/math': 0.1.0
+      '@use-gesture/react': 10.3.1(react@19.2.8)
+      merge-props: 6.0.0
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+    optionalDependencies:
+      '@types/react': 19.3.0
+      '@types/react-dom': 19.3.0(@types/react@19.3.0)
 
   react-remove-scroll-bar@2.3.8(@types/react@19.3.0)(react@19.2.8):
     dependencies:
